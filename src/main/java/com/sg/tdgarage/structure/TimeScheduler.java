@@ -1,13 +1,13 @@
-import java.util.ArrayList;
+package com.sg.tdgarage.structure;
+
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class TimeScheduler {
     //线路号
     private Integer busLine;
     //时刻表
-    private HashMap<Date,Integer> timeList= new HashMap<Date,Integer>();
+    private HashMap<Date,Integer> timeList= new HashMap<>();
     public HashMap<Date, Integer> getTimeList() {
         return timeList;
     }
