@@ -15,6 +15,6 @@ public class DepartureEvent extends Event {
 
     @Override
     public void action() {
-        allocator.schedule(this.time);
+        allocator.schedule(this.bus, this.time);
     }
 }

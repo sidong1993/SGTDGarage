@@ -102,7 +102,17 @@ public class TimeSpot {
 
     @Override
     public String toString() {
-        return h + ":" + m + ":" + s;
+        StringBuffer sb = new StringBuffer(7);
+        sb.append(h).append(":");
+        if (m < 10) {
+            sb.append("0");
+        }
+        sb.append(m).append(":");
+        if (s < 10) {
+            sb.append("0");
+        }
+        sb.append(s);
+        return sb.toString();
     }
 
     @Override

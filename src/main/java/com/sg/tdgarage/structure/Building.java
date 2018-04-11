@@ -29,9 +29,10 @@ public class Building {
             ParkingSpot[] levelSpots = spots[floor] = new ParkingSpot[config.parkingSpotPerFloor +
                     1];
             for (int spotNo = 1; spotNo <= config.parkingSpotPerFloor; ++spotNo) {
-                levelSpots[spotNo] = new ParkingSpot(floor, spotNo);
+                levelSpots[spotNo] = new ParkingSpot(no, floor, spotNo);
             }
         }
+        this.lifter = new Lifter();
     }
 
     public Shuttle getShuttle(int floor) {
@@ -62,7 +63,7 @@ public class Building {
         if (done) {
             return null;
         }
-        int allocatingFloor = getAllocatingFloor();
+        allocatingFloor = getAllocatingFloor();
         ParkingSpot chosenSpot = null;
         for (ParkingSpot spot : spots[allocatingFloor]) {
             if (spot == null) {
@@ -97,5 +98,14 @@ public class Building {
 
     public double getDistance(int spotNum) {
         return distanceGraph.getDistance(spotNum, Constant.LIFTER_SPOT_NO);
+    }
+
+    public int getBuildingNo() {
+        return no;
+    }
+
+    @Override
+    public String toString() {
+        return "[Building #" + no + "]";
     }
 }

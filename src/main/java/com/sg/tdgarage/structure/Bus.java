@@ -96,4 +96,13 @@ public class Bus {
     public void setDepartureTime(TimeSpot departureTime) {
         this.departureTime = departureTime;
     }
+
+    public String getLineName() {
+        return busLine.getName();
+    }
+
+    @Override
+    public String toString() {
+        return "[Bus[Line #" + busLine.getName() + ", Leave @" + departureTime + "]]";
+    }
 }

@@ -4,6 +4,7 @@ import com.sg.tdgarage.configure.ParkingLotConfiguration;
 import com.sg.tdgarage.core.Allocator;
 import com.sg.tdgarage.core.Constant;
 import com.sg.tdgarage.event.EventDriver;
+import com.sg.tdgarage.event.EventRecorder;
 import com.sg.tdgarage.structure.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -24,9 +25,11 @@ public class Main {
         loadBusLeaveSeq();
         Allocator allocator = new Allocator(lot, new LinkedBlockingQueue<>(busList), lineList);
         allocator.prepare();
+        processEvent();
+        EventRecorder.print();
     }
 
-    private void processEvent() {
+    private static void processEvent() {
         while(EventDriver.hasNext()){
             EventDriver.nextEvent().action();
         }

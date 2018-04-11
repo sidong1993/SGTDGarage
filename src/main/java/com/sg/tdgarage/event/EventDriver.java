@@ -14,6 +14,6 @@ public class EventDriver {
     }
 
     public static boolean hasNext() {
-        return eventQueue.isEmpty();
+        return !eventQueue.isEmpty();
     }
 }

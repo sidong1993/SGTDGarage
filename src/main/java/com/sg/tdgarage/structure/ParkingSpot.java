@@ -2,10 +2,12 @@ package com.sg.tdgarage.structure;
 
 public class ParkingSpot {
 
-    //楼号
-    private Integer buildingNum;
+//    //楼号
+//    private Integer buildingNum;
 //    //状态
 //    private Integer state;
+
+    private int buildingNo;
 
     /**
      * 状态
@@ -35,9 +37,10 @@ public class ParkingSpot {
         this.status = Status.EMPTY;
     }
 
-    public ParkingSpot(int floor, int spotNo) {
+    public ParkingSpot(int buildingNo, int floor, int spotNo) {
+        this.buildingNo = buildingNo;
         this.status = Status.EMPTY;
-        this.position = new PSPosition(floor,spotNo);
+        this.position = new PSPosition(floor, spotNo);
     }
 
     public Bus getBus() {
@@ -49,13 +52,17 @@ public class ParkingSpot {
         return this;
     }
 
-    public Integer getBuildingNum() {
-        return buildingNum;
-    }
+//    public Integer getBuildingNum() {
+//        return buildingNum;
+//    }
+//
+//    public ParkingSpot setBuildingNum(Integer buildingNum) {
+//        this.buildingNum = buildingNum;
+//        return this;
+//    }
 
-    public ParkingSpot setBuildingNum(Integer buildingNum) {
-        this.buildingNum = buildingNum;
-        return this;
+    public int getBuildingNo() {
+        return buildingNo;
     }
 
     public void setUsed(Bus bus) {
@@ -116,5 +123,10 @@ public class ParkingSpot {
 
     private enum Status {
         USED, EMPTY
+    }
+
+    @Override
+    public String toString() {
+        return "[ParkingSpot[Floor " + getFloor() + ", SpotNo " + getSpotNo() + "]]";
     }
 }

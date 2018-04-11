@@ -1,5 +1,7 @@
 package com.sg.tdgarage.structure;
 
+import com.sg.tdgarage.core.Constant;
+
 public class Lifter {
 //    //状态
 //    private Integer state;
@@ -33,6 +35,7 @@ public class Lifter {
 
     public Lifter() {
         this.status = Status.STOP;
+        this.end = Constant.INIT_ZERO_TIME;
     }
 
     public Double getCurrentCostTime() {
@@ -71,5 +74,10 @@ public class Lifter {
 
     public enum Status {
         RUNNING, STOP
+    }
+
+    @Override
+    public String toString() {
+        return "[Lifter@" + Integer.toHexString(hashCode()) + "]";
     }
 }

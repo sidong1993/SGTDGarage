@@ -13,7 +13,9 @@ public class Constant {
     public static final double SHUTTLE_SPD_WEIGHTED = 0.5;
     public static final double SHUTTLE_SPD_EMPTY = 1;
     public static final double BUILDING_INTERVAL = 0.652;
+    public static final double DISTANCE_OF_LIFTER = 22.86;
     public static final String TIME_SEQ_FILE_NAME = "Time.xlsx";
     public static final double COMBINE_LOADING_TIME_TOTAL = 52.444;
     public static final TimeSpot INIT_ZERO_TIME = new TimeSpot(0,0,0);
+
 }

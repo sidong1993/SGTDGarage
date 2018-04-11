@@ -1,6 +1,8 @@
 package com.sg.tdgarage.structure;
 
 import com.sg.tdgarage.core.Constant;
+import com.sg.tdgarage.event.EventRecorder;
+import com.sg.tdgarage.event.MessageEvent;
 
 public class Shuttle {
     //    //状态
@@ -28,12 +30,14 @@ public class Shuttle {
      */
     private Building currentBuilding;
 
-    //    //楼号
+//    //楼号
 //    private Integer buildingNum;
+
     //层号
     private Integer floorNum;
     //当前行为要花费的时间
     private Double currentCostTime;
+
     /**
      * 上一次运行结束的时间
      */
@@ -44,8 +48,9 @@ public class Shuttle {
         this.position = new PSPosition(floor, Constant.LIFTER_SPOT_NO);
         this.owners = owners;
         this.currentBuilding = owners[0];
-        owners[0].setFloorScanSequence(new int[] {4, 2, 3});
-        owners[1].setFloorScanSequence(new int[] {3, 4, 2});
+        owners[0].setFloorScanSequence(new int[]{4, 2, 3});
+        owners[1].setFloorScanSequence(new int[]{3, 4, 2});
+        this.end = Constant.INIT_ZERO_TIME;
     }
 
 //    public HorizontalShuttle(int buildingNum){
@@ -102,12 +107,27 @@ public class Shuttle {
         return this;
     }
 
-    public void leaveBuilding(Building building) {
-        if (owners[0] == building) {
-            setCurrentBuilding(owners[1]);
+    public void leaveBuilding(Building oldBuilding) {
+        Building newBuilding;
+
+        // 修改穿梭机当前所属库
+        if (owners[0] == oldBuilding) {
+            newBuilding = owners[1];
         } else {
-            setCurrentBuilding(owners[0]);
+            newBuilding = owners[0];
         }
+
+        setCurrentBuilding(newBuilding);
+
+        EventRecorder.record(new MessageEvent(end, oldBuilding, this, "前往 " + newBuilding));
+
+        // 穿梭车从当前库的升降机位置移动到另一个库的升降机位置所用的时间。
+        int movingTime = (int) Math.ceil(Constant.DISTANCE_OF_LIFTER / Constant.SHUTTLE_SPD_EMPTY +
+                Constant.SHUTTLE_ACC_TIME);
+
+        // 穿梭车到达另一个车库的时间点, 这属于一次新的运行，需要更新其运行停止时间
+        end = end.add(movingTime);
+        EventRecorder.record(new MessageEvent(end, newBuilding, this, "到达 " + newBuilding));
     }
 
     public TimeSpot getEnd() {
@@ -118,8 +138,17 @@ public class Shuttle {
         this.end = end;
     }
 
+    public Building getCurrentBuilding() {
+        return currentBuilding;
+    }
+
     private enum Status {
         RUNNING, STOP
     }
 
+    @Override
+    public String toString() {
+
+        return "[Shuttle[Floor " + position.getFloor() + "]]";
+    }
 }
