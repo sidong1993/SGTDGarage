@@ -17,5 +17,5 @@ public class Constant {
     public static final String TIME_SEQ_FILE_NAME = "Time.xlsx";
     public static final double COMBINE_LOADING_TIME_TOTAL = 52.444;
     public static final TimeSpot INIT_ZERO_TIME = new TimeSpot(0,0,0);
-
+    public static final String LOG_FILE_NAME = "src/main/resources/log.txt";
 }

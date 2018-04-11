@@ -18,6 +18,6 @@ public class MessageEvent extends Event {
 
     @Override
     public void action() {
-        System.out.println(this.time + "~" + building + "~" + obj + "~" + this.msg);
+        this.out.println(this.time + "~" + building + "~" + obj + "~" + this.msg);
     }
 }
